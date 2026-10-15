@@ -1,0 +1,19 @@
+
+{
+  "name": "nova-browser",
+  "version": "1.0.0",
+  "private": true,
+  "description": "NOVA Browser",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "next dev",
+    "build": "next build"
+  },
+  "dependencies": {
+    "electron": "^44.7.2",
+    "next": "^16.3.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
+}

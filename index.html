@@ -1,0 +1,127 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NOVA Browser</title>
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      background: #101116;
+      color: #f5f5f7;
+    }
+
+    header {
+      padding: 18px 28px;
+      background: #191a22;
+      border-bottom: 1px solid #30313b;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo {
+      font-size: 25px;
+      font-weight: 800;
+      letter-spacing: 3px;
+      color: #9b8cff;
+    }
+
+    .subtitle { color: #a6a6b4; font-size: 13px; }
+
+    main {
+      max-width: 850px;
+      margin: 100px auto;
+      padding: 24px;
+      text-align: center;
+    }
+
+    h1 { font-size: clamp(38px, 7vw, 64px); margin-bottom: 12px; }
+    p { color: #a6a6b4; line-height: 1.7; }
+
+    form {
+      display: flex;
+      gap: 10px;
+      margin: 30px 0;
+    }
+
+    input {
+      flex: 1;
+      min-width: 0;
+      padding: 16px;
+      border-radius: 12px;
+      border: 1px solid #383947;
+      background: #20212b;
+      color: white;
+      font-size: 16px;
+      outline: none;
+    }
+
+    button {
+      padding: 0 22px;
+      border: 0;
+      border-radius: 12px;
+      background: #8b7aff;
+      color: #11111a;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .note { font-size: 12px; }
+
+    @media (max-width: 520px) {
+      main { margin-top: 50px; }
+      form { flex-direction: column; }
+      button { padding: 16px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">NOVA</div>
+    <div>
+      <div><strong>NOVA Browser</strong></div>
+      <div class="subtitle">A fresh space for the web</div>
+    </div>
+  </header>
+
+  <main>
+    <h1>Explore beyond.</h1>
+    <p>Your next destination is one search away.</p>
+
+    <form id="searchForm">
+      <input id="address" type="text"
+        placeholder="Search the web or enter a website..."
+        autocomplete="off" autofocus>
+      <button type="submit">Explore ↗</button>
+    </form>
+
+    <p class="note">NOVA Browser · Your journey starts here.</p>
+  </main>
+
+  <script>
+    document.getElementById("searchForm").addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      const value = document.getElementById("address").value.trim();
+      if (!value) return;
+
+      const looksLikeUrl =
+        /^(https?:\/\/)/i.test(value) ||
+        (/^[\w.-]+\.[a-z]{2,}(\/.*)?$/i.test(value) &&
+         !/\s/.test(value));
+
+      const destination = looksLikeUrl
+        ? (value.startsWith("http") ? value : "https://" + value)
+        : "https://www.google.com/search?q=" + encodeURIComponent(value);
+
+      window.open(destination, "_blank", "noopener,noreferrer");
+    });
+  </script>
+</body>
+</html>
